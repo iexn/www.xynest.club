@@ -1,0 +1,41 @@
+<!--- Sidemenu -->
+<ul class="metismenu side-nav">
+    {volist name="menus" id="menu"}
+
+        {if condition="is_string($menu)"}
+
+            <li class="side-nav-title side-nav-item"> {$menu} </li>
+
+        {else/}
+
+            <li class="side-nav-item">
+                <a href="{$menu['url']|default='javascript:;'}" class="side-nav-link">
+                    <i class="{$menu['icon']}"></i> <span> {$menu['name']} </span>
+                    <!-- <span class="badge badge-success float-right">3</span> -->
+                    {if condition="!empty($menu['_child'])"}<span class="menu-arrow"></span>{/if}
+                </a>
+                {if condition="!empty($menu['_child'])"}
+                <ul class="side-nav-second-level" aria-expanded="false">
+                    {volist name="menu['_child']" id="child"}
+                    <li class="side-nav-item">
+                        <a href="{$child['url']|default='javascript:;'}" aria-expanded="false"> {$child['name']}
+                            {if condition="!empty($child['_child'])"}<span class="menu-arrow"></span>{/if}
+                        </a>
+                        {if condition="!empty($child['_child'])"}
+                        <ul class="side-nav-third-level" aria-expanded="false">
+                            {volist name="child['_child']" id="child_item"}
+                            <li><a href="{$child_item['url']|default='javascript:;'}"> {$child_item['name']} </a></li>
+                            {/volist}
+                        </ul>
+                        {/if}
+                    </li>
+                    {/volist}
+                </ul>
+                {/if}
+            </li>
+
+        {/if}
+
+    {/volist}
+
+</ul>

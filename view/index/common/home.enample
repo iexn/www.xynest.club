@@ -1,0 +1,10 @@
+{extend name="common/home"}
+{block name="head"}
+
+{/block}
+{block name="main"}
+
+{/block}
+{block name="end"}
+
+{/block}

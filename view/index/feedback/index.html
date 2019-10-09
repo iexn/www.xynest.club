@@ -1,0 +1,12 @@
+{extend name="common/home"}
+{block name="main"}
+<form action="" method="post" onsubmit="return confirm('确认提交？')">
+    <div class="form-group">
+        <label>请填写反馈内容：</label>
+        <textarea class="form-control" rows="6"></textarea>
+    </div>
+    <p>
+        <button type="submit" class="btn btn-secondary">提交</button>
+    </p>
+</form>
+{/block}

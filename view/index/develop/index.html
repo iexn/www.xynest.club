@@ -1,0 +1,54 @@
+{extend name="common/home"}
+
+{block name="main"}
+<link href="https://cdn.bootcss.com/font-awesome/5.10.2/css/all.min.css" rel="stylesheet">
+<div class="d-flex align-content-start flex-wrap">
+    <!-- 
+    <div class="p-2"><a href="" target="_blank" class="btn btn-primary"></a></div>
+    -->
+    
+    <div class="p-2"><a href="https://github.com/" target="_blank" class="btn btn-primary">Github</a></div>
+    <div class="p-2"><a href="http://unbug.github.io/codelf/" target="_blank" class="btn btn-warning">codelf 变量命名神器</a></div>
+    <div class="p-2"><a href="https://tool.lu/" target="_blank" class="btn btn-danger">在线工具箱</a></div>
+    <div class="p-2"><a href="http://www.jq22.com/" target="_blank" class="btn btn-light">jq22</a></div>
+    <div class="p-2"><a href="https://cubic-bezier.com/" target="_blank" class="btn btn-success">css贝塞尔曲线设置</a></div>
+    <div class="p-2"><a href="http://hao.shejidaren.com/" target="_blank" class="btn btn-secondary">设计导航</a></div>
+    <div class="p-2"><a href="http://www.nicetool.net/" target="_blank" class="btn btn-info">在线工具大全</a></div>
+    <div class="p-2"><a href="http://www.bootcdn.cn/" target="_blank" class="btn btn-warning">BootCDN</a></div>
+    <div class="p-2"><a href="http://www.bejson.com/" target="_blank" class="btn btn-success">bejson</a></div>
+</div>
+
+
+<hr>
+
+<div class="d-flex align-content-start flex-wrap">
+    <div class="p-2"><a href="https://git-scm.com/downloads" target="_blank" class="btn btn-danger">Git</a></div>
+
+</div>
+
+{/block}
+
+{block name="head"}
+<style>
+.p-2 .btn{transform:scale(0);transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out, transform cubic-bezier(0.13, 0.73, 0.96, 2.1) .4s}
+.p-2 .btn.show{transform:scale(1)}
+</style>
+{/block}
+
+{block name="end"}
+<script>
+require.init = function (require) {
+    require(['jquery'], function ($) {
+        $('.p-2 .btn').each(function () {
+
+            let rand = Math.random() * 800;
+
+            setTimeout(() => {
+                $(this).addClass('show');
+            }, rand);
+
+        });
+    });
+};
+</script>
+{/block}

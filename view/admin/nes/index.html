@@ -1,0 +1,61 @@
+{extend name="common/common"}
+
+{block name="main"}
+
+<div class="mb-2 clearfix">
+    <div style="float:left">
+        <a href="javascript:void(0);" class="btn btn-danger mb-2">添加rom</a>
+    </div>
+    <form method="GET" action="" class="form-inline" style="float:right;display:inline-block">
+        <input type="text" class="form-control" placeholder="rom...">
+        <button type="button" class="btn btn-warning">搜索</button>
+    </form>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-centered w-100 dt-responsive nowrap" id="products-datatable">
+        <thead class="thead-light">
+            <tr>
+                <th class="all">rom</th>
+                <th>版本</th>
+                <th>上传时间</th>
+                <th>上传人</th>
+                <th>排序</th>
+                <th>状态</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <img src="https://www.fcnes.com/uploads/allimg/190606/1-1Z6061H95GB.jpg" alt="" class="rounded mr-3"
+                        height="48" />&ensp;忍着龙剑传3
+                </td>
+                <td>
+                    <div>美版 <a href="" class="badge badge-danger">移除</a></div>
+                    <div>日版 <a href="" class="badge badge-danger">移除</a></div>
+                    <div><a href="" class="badge badge-success">+ 添加其他版本</a></div>
+                </td>
+                <td>
+                    2019.4.18
+                </td>
+                <td>
+                    iexn
+                </td>
+
+                <td>
+                    0
+                </td>
+                <td>
+                    <span class="badge badge-success">可用</span>
+                </td>
+
+                <td class="table-action">
+                    <a href="" class="btn btn-primary">编辑</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+{/block}

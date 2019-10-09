@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{$title}</title>
+
+    <link rel="stylesheet" href="https://cdn.xynest.club/library/bootstrap/4.3.1/bootstrap.min.css">
+    
+    <style>
+        #app,body,html{height:100%;position:relative;z-index:5;font-size:14px}
+        #app,.real-start{border-top:1px solid transparent;margin-top:-1px}
+        main.container{padding: 60px 15px 0;}
+        .navbar-nav{flex-direction:row;}
+        
+        .bg-474f60{background-color:#474f60}
+        .navbar-nav .nav-link{padding-right: 1rem;padding-left: 1rem;}
+        .navbar-nav .dropdown-menu{position:absolute}
+    </style>
+
+    <script src="https://cdn.xynest.club/library/require/require.min.js" data-main="/index/require-config"></script>
+
+    {block name="head"}{/block}
+
+</head>
+<body>
+    <div id="app">
+        {include file="common/header"}
+        
+        <main class="container" style="min-height: 100%;">
+            
+            {block name="main"}
+                {include file="common/developing"}
+            {/block}
+
+        </main>
+
+        {include file="common/footer"}
+    </div>
+
+    {block name="end"}{/block}
+
+</body>
+</html>

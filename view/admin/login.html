@@ -1,0 +1,96 @@
+{extend name='common/common-base'}
+{block name="main"}
+
+<div class="account-pages mt-5 mb-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-5">
+                <div class="card">
+
+                    <!-- Logo -->
+                    <!-- <div class="card-header pt-4 pb-4 text-center bg-primary">
+                                <a href="index.html">
+                                    <span><img src="/admin/theme/datached/assets/images/logo.png" alt="" height="18"></span>
+                                </a>
+                            </div> -->
+
+                    <div class="card-body p-4">
+
+                        <div class="text-center w-75 m-auto">
+                            <h4 class="text-dark-50 text-center mt-0 font-weight-bold">登录</h4>
+                            <p class="text-muted mb-4">输入账号密码登录后台管理</p>
+                        </div>
+
+                        <form action="#" id="form">
+
+                            <div class="form-group">
+                                <label>用户名</label>
+                                <input class="form-control" type="text" name="username" placeholder="请输入用户名" autocomplete="off">
+                            </div>
+
+                            <div class="form-group">
+                                <!-- <a href="pages-recoverpw.html" class="text-muted float-right"><small>找回密码</small></a> -->
+                                <label>密码</label>
+                                <input class="form-control" type="password" name="password" placeholder="请输入密码">
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="checkbox-signin" checked name="remember" value="on">
+                                    <label class="custom-control-label" for="checkbox-signin">记住本次登录</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group mb-0 text-center">
+                                <button class="btn btn-primary" type="submit" data-loading-text="正在登录...">
+                                    登 录
+                                </button>
+                            </div>
+
+                        </form>
+
+                    </div>
+
+                    <!-- <div class="row mt-3">
+                            <div class="col-12 text-center">
+                                <p class="text-muted">没有账号？ <a href="pages-register.html"
+                                        class="text-muted ml-1"><b>前往注册</b></a></p>
+                            </div>
+                        </div> -->
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <footer class="footer footer-alt">
+            2018 - 2019 © 休闲小红屋 - <a href="https://www.xynest.club" target="_blank">www.xynest.club</a>
+        </footer>
+    </div>
+</div>
+
+{/block}
+
+{block name="end"}
+<script>
+    // require(['admin'], function (Admin) {
+        $$('#form').on('submit', function (e) {
+            e.preventDefault();
+            var _loading = Admin.loading('[type=submit]');
+            $$.post('/login/signin', new FormData(this)).done(function (response) {
+                _loading.hide(function () {
+                    if(response.code < 90000) {
+                        $.NotificationApp.send('登录失败', response.message, "top-center", "rgba(0,0,0,0.2)", "error");
+                        return false;
+                    }
+                    $.NotificationApp.send("登录成功", "<a href='/'>点击立即跳转</a>", "top-center", "rgba(0,0,0,0.2)", "success");
+                    setTimeout(function () {
+                        location.href = '/';
+                    }, 1000);
+                });
+            });
+        });
+    // });
+</script>
+{/block}
