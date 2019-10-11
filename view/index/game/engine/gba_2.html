@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<!-- saved from url=(0051)http://jsemu2.github.io/gba/launcher.html#mariokart -->
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>{$title}</title>
+
+    <meta name="viewport" content="width=160">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <script>
+        window.game_name = '{$game_name}';
+        window.game_path = '{$game_path}';
+    </script>
+    <link rel="stylesheet" href="/lib/engine/gba_2/main.css">
+    <!--Required Scripts-->
+    <script src="/lib/engine/gba_2/TypedArrayShim.js"></script>
+    <script src="/lib/engine/gba_2/Cartridge.js"></script>
+    <script src="/lib/engine/gba_2/DMA.js"></script>
+    <script src="/lib/engine/gba_2/Emulator.js"></script>
+    <script src="/lib/engine/gba_2/Graphics.js"></script>
+    <script src="/lib/engine/gba_2/RunLoop.js"></script>
+    <script src="/lib/engine/gba_2/Memory.js"></script>
+    <script src="/lib/engine/gba_2/IRQ.js"></script>
+    <script src="/lib/engine/gba_2/JoyPad.js"></script>
+    <script src="/lib/engine/gba_2/Serial.js"></script>
+    <script src="/lib/engine/gba_2/Sound.js"></script>
+    <script src="/lib/engine/gba_2/Timer.js"></script>
+    <script src="/lib/engine/gba_2/Wait.js"></script>
+    <script src="/lib/engine/gba_2/CPU.js"></script>
+    <script src="/lib/engine/gba_2/Saves.js"></script>
+    <script src="/lib/engine/gba_2/FIFO.js"></script>
+    <script src="/lib/engine/gba_2/Channel1.js"></script>
+    <script src="/lib/engine/gba_2/Channel2.js"></script>
+    <script src="/lib/engine/gba_2/Channel3.js"></script>
+    <script src="/lib/engine/gba_2/Channel4.js"></script>
+    <script src="/lib/engine/gba_2/ARM.js"></script>
+    <script src="/lib/engine/gba_2/THUMB.js"></script>
+    <script src="/lib/engine/gba_2/CPSR.js"></script>
+    <script src="/lib/engine/gba_2/Renderer.js"></script>
+    <script src="/lib/engine/gba_2/RendererShim.js"></script>
+    <script src="/lib/engine/gba_2/RendererProxy.js"></script>
+    <script src="/lib/engine/gba_2/BGTEXT.js"></script>
+    <script src="/lib/engine/gba_2/BG2FrameBuffer.js"></script>
+    <script src="/lib/engine/gba_2/BGMatrix.js"></script>
+    <script src="/lib/engine/gba_2/AffineBG.js"></script>
+    <script src="/lib/engine/gba_2/ColorEffects.js"></script>
+    <script src="/lib/engine/gba_2/Mosaic.js"></script>
+    <script src="/lib/engine/gba_2/OBJ.js"></script>
+    <script src="/lib/engine/gba_2/OBJWindow.js"></script>
+    <script src="/lib/engine/gba_2/Window.js"></script>
+    <script src="/lib/engine/gba_2/Compositor.js"></script>
+    <script src="/lib/engine/gba_2/DMA0.js"></script>
+    <script src="/lib/engine/gba_2/DMA1.js"></script>
+    <script src="/lib/engine/gba_2/DMA2.js"></script>
+    <script src="/lib/engine/gba_2/DMA3.js"></script>
+    <script src="/lib/engine/gba_2/SaveDeterminer.js"></script>
+    <script src="/lib/engine/gba_2/SRAM.js"></script>
+    <script src="/lib/engine/gba_2/FLASH.js"></script>
+    <script src="/lib/engine/gba_2/EEPROM.js"></script>
+    <script src="/lib/engine/gba_2/GPIO.js"></script>
+    <!--Add your webpage scripts below-->
+    <script src="/lib/engine/gba_2/AudioGlueCode.js"></script>
+    <script src="/lib/engine/gba_2/base64.js"></script>
+    <script src="/lib/engine/gba_2/CoreGlueCode.js"></script>
+    <script src="/lib/engine/gba_2/GfxGlueCode.js"></script>
+    <script src="/lib/engine/gba_2/GUIGlueCode.js"></script>
+    <script src="/lib/engine/gba_2/JoyPadGlueCode.js"></script>
+    <script src="/lib/engine/gba_2/ROMLoadGlueCode.js"></script>
+    <script src="/lib/engine/gba_2/SavesGlueCode.js"></script>
+    <script src="/lib/engine/gba_2/WorkerGfxGlueCode.js"></script>
+    <script src="/lib/engine/gba_2/WorkerGlueCode.js"></script>
+    <script src="/lib/engine/gba_2/swfobject.js"></script>
+    <script src="/lib/engine/gba_2/resampler.js"></script>
+    <script src="/lib/engine/gba_2/XAudioServer.js"></script>
+</head>
+
+<body>
+    <div id="container">
+        <div id="menu" class="paused">
+            <ul class="menu" id="menu_top">
+                <li><a href="/">休闲小红屋</a></li>
+                <li>
+                    文件
+                    <ul>
+                        <li><span>BIOS: </span> <input type="file" id="bios_load" class="files"></li>
+                        <li><span>Game: </span> <input type="file" id="rom_load" class="files"></li>
+                    </ul>
+                </li>
+                <li id="play" class="show">开始</li>
+                <li id="pause" class="hide">暂停</li>
+                <li id="restart">重置</li>
+                <li>
+                    设置
+                    <ul>
+                        <li>
+                            <input type="checkbox" id="skip_boot"> Skip Boot Intro
+                        </li>
+                        <li>
+                            <input type="checkbox" id="toggleSmoothScaling" checked="checked"> Smooth Scaling
+                        </li>
+                        <li>
+                            <input type="checkbox" id="toggleDynamicSpeed"> Dynamic Speed
+                        </li>
+                        <li>
+                            <input type="checkbox" id="offthread-cpu" checked="checked" disabled=""> CPU off-thread
+                        </li>
+                        <li>
+                            <input type="checkbox" id="offthread-gpu" checked="checked" disabled=""> GPU off-thread
+                        </li>
+                        <li>
+                            <input type="checkbox" id="sound"> 打开声音
+                        </li>
+                        <li>
+                            GBA快捷键
+                            <ul>
+                                <li id="key_a">
+                                    <span>A</span>
+                                </li>
+                                <li id="key_b">
+                                    <span>B</span>
+                                </li>
+                                <li id="key_l">
+                                    <span>L</span>
+                                </li>
+                                <li id="key_r">
+                                    <span>R</span>
+                                </li>
+                                <li id="key_start">
+                                    <span>Start</span>
+                                </li>
+                                <li id="key_select">
+                                    <span>Select</span>
+                                </li>
+                                <li id="key_up">
+                                    <span>↑</span>
+                                </li>
+                                <li id="key_down">
+                                    <span>↓</span>
+                                </li>
+                                <li id="key_left">
+                                    <span>←</span>
+                                </li>
+                                <li id="key_right">
+                                    <span>→</span>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            模拟器快捷键
+                            <ul>
+                                <li id="key_volumeup">
+                                    <span>音量 ↑</span>
+                                </li>
+                                <li id="key_volumedown">
+                                    <span>音量 ↓</span>
+                                </li>
+                                <li id="key_speedup">
+                                    <span>速度 ↑</span>
+                                </li>
+                                <li id="key_slowdown">
+                                    <span>速度 ↓</span>
+                                </li>
+                                <li id="key_speedreset">
+                                    <span>重置速度</span>
+                                </li>
+                                <li id="key_fullscreen">
+                                    <span>全屏</span>
+                                </li>
+                                <li id="key_playpause">
+                                    <span>开始/暂停</span>
+                                </li>
+                                <li id="key_restart">
+                                    <span>重置游戏</span>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    音量
+                    <ul>
+                        <li>
+                            <input type="range" id="volume" min="0" max="100" step="1">
+                        </li>
+                    </ul>
+                </li>
+                <li id="saves_menu">
+                    记录
+                    <ul id="saves_menu_container">
+                        <li>
+                            <span>导入：</span><input type="file" id="import" class="files">
+                        </li>
+                        <li id="existing_saves">
+                            <span>Existing Saves</span>
+                            <ul id="existing_saves_list">
+                                <li class="nowrap"><span>Game "AMKE01" Cartridge Data</span>
+                                    <ul>
+                                        <li class="nowrap"><span>Delete</span></li>
+                                        <li class="nowrap"><a
+                                                href=""
+                                                download="SAVE_GUID_AMKE01_1570712945861.sav">Download as raw
+                                                binary</a></li>
+                                    </ul>
+                                </li>
+                                <li class="nowrap"><span>Game "AWRE01" Cartridge Data</span>
+                                    <ul>
+                                        <li class="nowrap"><span>Delete</span></li>
+                                        <li class="nowrap"><a
+                                                href=""
+                                                download="SAVE_GUID_AWRE01_1570712945865.export">Download as import
+                                                compatible</a></li>
+                                        <li class="nowrap"><a
+                                                href=""
+                                                download="SAVE_GUID_AWRE01_1570712945866.sav">Download as raw
+                                                binary</a></li>
+                                    </ul>
+                                </li>
+                                <li class="nowrap"><span>Game "AMKE01" Type Code</span>
+                                    <ul>
+                                        <li class="nowrap"><span>Delete</span></li>
+                                        <li class="nowrap"><a
+                                                href="data:application/octet-stream;base64,RU1VTEFUT1JfREFUQT8AAAAOR2FtZUJveUFkdmFuY2UWU0FWRV9UWVBFX0dVSURfQU1LRTAxlgQAAABBZz09"
+                                                download="SAVE_TYPE_GUID_AMKE01_1570712945866.export">Download as
+                                                import compatible</a></li>
+                                        <li class="nowrap"><a href="data:application/octet-stream;base64,Ag=="
+                                                download="SAVE_TYPE_GUID_AMKE01_1570712945866.sav">Download as raw
+                                                binary</a></li>
+                                    </ul>
+                                </li>
+                                <li class="nowrap"><span>Game "AWRE01" Type Code</span>
+                                    <ul>
+                                        <li class="nowrap"><span>Delete</span></li>
+                                        <li class="nowrap"><a
+                                                href="data:application/octet-stream;base64,RU1VTEFUT1JfREFUQT8AAAAOR2FtZUJveUFkdmFuY2UWU0FWRV9UWVBFX0dVSURfQVdSRTAxlgQAAABBZz09"
+                                                download="SAVE_TYPE_GUID_AWRE01_1570712945866.export">Download as
+                                                import compatible</a></li>
+                                        <li class="nowrap"><a href="data:application/octet-stream;base64,Ag=="
+                                                download="SAVE_TYPE_GUID_AWRE01_1570712945866.sav">Download as raw
+                                                binary</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="http://jsemu2.github.io/gba/" id="export" target="_new">Export All Saves</a>
+                        </li>
+                    </ul>
+                </li>
+                <li id="fullscreen">全屏</li>
+                <li>
+                    <span id="speed">速度</span>
+                    <ul>
+                        <li>
+                            <input type="range" id="speedset">
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    说明
+                    <ul>
+                        <li>点击Play开始游戏</li>
+                        <li>操作：方向键：wsad；基础键：jkui；选择：2；确定：1</li>
+                        <li>修改按键：点击按键后输入新键自动变更</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div id="main">
+            <canvas class="textureSmooth" id="emulator_target" width="240" height="160"
+                style="height:70%"></canvas>
+        </div>
+        <div class="touch-controls">
+            <div class="touch-dpad">
+                <button id="touch-up">↑</button><br>
+                <button id="touch-left">←</button>
+                <button id="touch-right">→</button><br>
+                <button id="touch-down">↓</button>
+            </div>
+            <div class="touch-buttons">
+                <button id="touch-select">SELECT</button>
+                <button id="touch-start">START</button>
+            </div>
+            <div class="touch-buttons">
+                <button id="touch-a">A</button>
+                <button id="touch-b">B</button><br>
+                <button id="touch-l">L</button>
+                <button id="touch-r">R</button>
+            </div>
+        </div>
+        <span class="message" id="tempMessage"></span>
+    </div>
+
+</body>
+
+</html>

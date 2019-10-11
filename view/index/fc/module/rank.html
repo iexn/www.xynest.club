@@ -1,0 +1,9 @@
+<div class="columns">
+    <h5>热门推荐</h5>
+    <hr>
+    <ol>
+        {volist name=":data_fc_rank()" id="game"}
+            <li><a href="/game/nes/{$game['id']}">{$game['name']}</a></li>
+        {/volist}
+    </ol>
+</div>

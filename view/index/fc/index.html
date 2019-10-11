@@ -1,10 +1,6 @@
 {extend name="common/home"}
 {block name="head"}
 <style>
-    .pagination{margin:1rem 0 4rem}
-    .pagination>li{display:inline-block;vertical-align:middle;font-weight:700;font-size:14px}
-    .pagination>li>a,.pagination>li>span{float:left;display:block;margin:0 2px;padding:0 13px;height:38px;min-width:15px;outline:0;border:1px solid #ddd;border-radius:4px;background-color:#fff;background-image:none;color:#222;text-align:center;font:12px Helvetica Neue,Helvetica,Arial,Microsoft Yahei,Hiragino Sans GB,Heiti SC,WenQuanYi Micro Hei,sans-serif;font-size:14px;line-height:38px;cursor:pointer;transition:all .2s}
-    .pagination>li.active>a,.pagination>li.active>span,.pagination>li>a:hover{border:1px solid #00a1d6;background:#00a1d6;color:#fff;text-decoration:none}
     .columns:not(:first-child){margin-top:3rem}
     .hashtolink{margin-top:-60px;padding-top:60px}
 </style>
@@ -15,7 +11,7 @@
 <div class="carousel slide mb-3" data-ride="carousel">
     <div class="carousel-inner">
         <div class="carousel-item active">
-            <img src="/index/img/bg_fc_1.jpg" class="d-block w-100" alt="">
+            <img src="https://cdn.xynest.club/bg/bg_fc_1.jpg" class="d-block w-100" alt="">
         </div>
     </div>
 </div>
@@ -29,7 +25,7 @@
             <div class="clearfix mb-4">
                 <form action="#topic" class="form-inline row">
                     <div class="input-group mb-3">
-                        <input type="text" name="name" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" placeholder="搜索游戏名" value="{$_GET['name'] ?? ''}">
+                        <input type="text" name="name" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" placeholder="搜索游戏名" value="{$_GET['name'] ?? ''}" autocomplete="off">
                         <div class="input-group-append">
                             <button class="btn btn-outline-primary" type="submit">搜索</button>
                         </div>
@@ -42,7 +38,7 @@
                 <div class="col-12 col-sm-12 col-md-6 col-lg-4 mb-4">
                     <div class="card border-0">
                         <div style="width:100%;height:0;padding-top:93.75%;background-image:url({$game['cover']});background-repeat:no-repeat;background-size:cover;background-position:center center;background-color:#f0f0f0"></div>
-                        <div class="card-body" style="padding:0.75rem 0">
+                        <div class="card-body" style="padding:0.75rem">
                             <h5 class="card-title" title="{$game['name']}" style="white-space: nowrap;text-overflow:ellipsis;overflow:hidden">{$game['name']}</h5>
                             <p class="card-text">
                                 {volist name=":explode(',', $game['tag'])" id="tag"}
@@ -69,25 +65,8 @@
 
         <div class="col-sm-4">
             
-            <div class="columns">
-                <h5>热门推荐</h5>
-                <hr>
-                <ol>
-                    {volist name="rank" id="game"}
-                        <li><a href="/game/nes/{$game['id']}">{$game['name']}</a></li>
-                    {/volist}
-                </ol>
-            </div>
-
-            <div class="columns">
-                <h5>最新添加</h5>
-                <hr>
-                <ol>
-                    {volist name="new" id="game"}
-                        <li><a href="/game/nes/{$game['id']}">{$game['name']}</a></li>
-                    {/volist}
-                </ol>
-            </div>
+            {include file="fc/module/rank"}
+            {include file="fc/module/new"}
 
         </div>
     </div>

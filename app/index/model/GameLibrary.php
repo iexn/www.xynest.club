@@ -87,4 +87,20 @@ class GameLibrary extends Common
         ]);
     }
 
+    /**
+     * 获取游戏简要详情
+     */
+    public function getGameSimpleList($ids)
+    {
+        if(is_string($ids)) {
+            $ids = explode(',', $ids);
+        }
+
+        $list = $this->field(['id','name','cover'])->where([
+            ['id', 'in', $ids]
+        ])->select();
+
+        return $list->toArray();
+    }
+
 }

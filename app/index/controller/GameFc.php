@@ -1,5 +1,7 @@
 <?php
 namespace app\index\controller;
+
+use app\index\model\Game;
 use think\facade\Request;
 use app\index\model\GameLibrary;
 use app\index\model\SearchLog;
@@ -32,16 +34,30 @@ class GameFc extends Common
         if(!empty($name) && $page == NULL) {
             $SearchLog = new SearchLog;
             $SearchLog->recode($name, 'nes');
-            
         }
 
-        $rank = $GameLibrary->getRankList();
-        $new = $GameLibrary->getNewList();
-
         $this->assign('games', $games);
-        $this->assign('rank', $rank);
-        $this->assign('new', $new);
         return $this->fetch('fc/index');
+    }
+
+    /**
+     * 游戏详情
+     */
+    public function detail()
+    {
+        $request = Request::instance();
+        $game_id = $request->param('id');
+
+        $Game = new Game;
+        $row = $Game->findRow([
+            'id' => $game_id
+        ]);
+
+        $GameLibrary = new GameLibrary;
+        $game_version_list = $GameLibrary->getGameSimpleList($row['game_library_ids']);
+        
+        $this->assign('game', $row);
+        $this->assign('game_version_list', $game_version_list);
     }
 
     public function start()

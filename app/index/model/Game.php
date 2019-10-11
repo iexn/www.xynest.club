@@ -1,7 +1,7 @@
 <?php
 namespace app\index\model;
 
-class GameLibrary extends Common
+class Game extends Common
 {
 
     public function getList($condition = [])
@@ -10,7 +10,7 @@ class GameLibrary extends Common
                     ->where(['status'=>'on'])
                     ->order(['sort'=>'DESC', 'id'=>'DESC'])
                     ->paginate([
-                        'list_rows' => 3,
+                        'list_rows' => 15,
                         'query' => [
                             'name' => $condition['name']
                         ]

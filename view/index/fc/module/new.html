@@ -1,0 +1,9 @@
+<div class="columns">
+    <h5>最新添加</h5>
+    <hr>
+    <ol>
+        {volist name=":data_fc_new()" id="game"}
+            <li><a href="/game/nes/{$game['id']}">{$game['name']}</a></li>
+        {/volist}
+    </ol>
+</div>

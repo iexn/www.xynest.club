@@ -17,6 +17,7 @@ Route::get('/', 'Index/index');
 
 // 登录页
 Route::get('login', 'login/index');
+Route::get('login/index', 'login/index');
 
 // 登录
 Route::post('login/signin', 'login/signin');

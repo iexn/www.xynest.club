@@ -9,7 +9,7 @@ class AdminAuth
     public function handle($request, \Closure $next)
     {
         // 添加中间件执行代码
-        $admin = $this->validateAdmin();
+        $admin = $this->validateAdmin($request);
         if($admin !== true) {
             return $admin;
         }
@@ -17,26 +17,25 @@ class AdminAuth
         return $next($request);
     }
 
-    public function validateAdmin()
+    public function validateAdmin($request)
     {
-        $instance = Request::instance();
-
+        
         // Login.php排除
-        if($instance->app() == 'admin' && $instance->controller() == 'Login') {
-            return true;
+        if(Request::controller() == 'login') {
         }
+        return true;
 
         $sign = Cookie::get('admin_sign');
         if(empty($sign)) {
             // 会话已过期，请重新登录
-            return redirect('Login/index')->remember();
+            return redirect('login/index')->remember();
         }
 
         $admin = decry($sign);
 
         if(empty($admin)) {
             // 会话已过期，请重新登录
-            return redirect('Login/index')->remember();
+            return redirect('login/index')->remember();
         }
 
         Session::set('admin', $admin);

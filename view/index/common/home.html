@@ -11,12 +11,28 @@
     <style>
         #app,body,html{height:100%;position:relative;z-index:5;font-size:14px}
         #app,.real-start{border-top:1px solid transparent;margin-top:-1px}
+        #app{overflow-y:auto;overflow-x:hidden;background-color:#f3f3f3}
         main.container{padding: 60px 15px 0;}
         .navbar-nav{flex-direction:row;}
         
         .bg-474f60{background-color:#474f60}
         .navbar-nav .nav-link{padding-right: 1rem;padding-left: 1rem;}
         .navbar-nav .dropdown-menu{position:absolute}
+        .footer a{color:inherit}
+        blockquote{user-select:none;-webkit-user-select:none}
+
+        .pagination{margin:1rem 0 4rem}
+        .pagination>li{display:inline-block;vertical-align:middle;font-weight:700;font-size:14px}
+        .pagination>li>a,.pagination>li>span{float:left;display:block;margin:0 2px;padding:0 13px;height:38px;min-width:15px;outline:0;border:1px solid #ddd;border-radius:4px;background-color:#fff;background-image:none;color:#222;text-align:center;font:12px Helvetica Neue,Helvetica,Arial,Microsoft Yahei,Hiragino Sans GB,Heiti SC,WenQuanYi Micro Hei,sans-serif;font-size:14px;line-height:38px;cursor:pointer;transition:all .2s}
+        .pagination>li.active>a,.pagination>li.active>span,.pagination>li>a:hover{border:1px solid #00a1d6;background:#00a1d6;color:#fff;text-decoration:none}
+        
+        ::-webkit-scrollbar{width:10px;height:10px}
+        ::-webkit-scrollbar-track{background:0 0}
+        ::-webkit-scrollbar-thumb{background-color:#474f60}
+        ::-webkit-scrollbar-thumb:hover{background-color:#474f60}
+        ::-webkit-scrollbar-resizer{background-color:#ff6e00}
+        body ::-webkit-scrollbar{width:2px}
+        body ::-webkit-scrollbar-thumb{background-color:#474f60}
     </style>
 
     <script src="https://cdn.xynest.club/library/require/require.min.js" data-main="/index/require-config"></script>

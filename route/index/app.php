@@ -20,6 +20,7 @@ Route::post('/feedback', 'Feedback/send');
 // nes 统计次数
 Route::get('game/nes/statistics/times/:id', 'GameFc/stat_times');
 // nes主页
+Route::get('game/nes/:id/:game_library_id', 'GameFc/detail');
 Route::get('game/nes/:id', 'GameFc/start');
 Route::get('game/nes', 'GameFc/index');
 
@@ -27,7 +28,7 @@ Route::get('game/nes', 'GameFc/index');
 Route::get('game/wzq', 'GameOthers/wzq');
 
 // gba主页
-Route::get('game/gba/:id', 'GameGba/start');
+Route::get('game/gba/:id', 'GameGba/test');
 
 // 开发专区
 Route::get('develop', 'Develop/index');

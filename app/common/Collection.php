@@ -34,10 +34,10 @@ class Collection
     }
 
 
-    public static function fetch($template, $renderContent = false)
+    public static function fetch($template, $vars = [])
     {
         View::assign(self::$collection);
-        return View::fetch($template, $renderContent);
+        return View::fetch($template, $vars);
     }
 
     public static function json()

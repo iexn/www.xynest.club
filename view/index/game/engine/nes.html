@@ -61,7 +61,7 @@
         window.onload = function(){
             nes_load_url("nes_screen", window.game_path);
 
-            setTimeout(() => {
+            setInterval(() => {
                 fetch('/game/nes/statistics/times/{$game_id}');
             }, 300000);
         
