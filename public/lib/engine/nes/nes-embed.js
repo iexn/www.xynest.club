@@ -12,6 +12,9 @@ var audio_samples_L = new Float32Array(SAMPLE_COUNT);
 var audio_samples_R = new Float32Array(SAMPLE_COUNT);
 var audio_write_cursor = 0, audio_read_cursor = 0;
 
+var VELOCITY = 16.666667;
+var SPEED    = 1;
+
 var nes = new jsnes.NES({
 	onFrame: function(framebuffer_24){
 		for(var i = 0; i < FRAMEBUFFER_SIZE; i++) framebuffer_u32[i] = 0xFF000000 | framebuffer_24[i];
@@ -25,6 +28,7 @@ var nes = new jsnes.NES({
 
 function onAnimationFrame(){
 	window.requestAnimationFrame(onAnimationFrame);
+	// window.setTimeout(onAnimationFrame, VELOCITY * SPEED);
 
 	image.data.set(framebuffer_u8);
 	canvas_ctx.putImageData(image, 0, 0);
@@ -55,6 +59,11 @@ function audio_callback(event){
 	audio_read_cursor = (audio_read_cursor + len) & SAMPLE_MASK;
 }
 
+var UNINTERRUPTED_BUTTON_A_ST = null;
+var UNINTERRUPTED_BUTTON_A_DOWN = false;
+var UNINTERRUPTED_BUTTON_B_ST = null;
+var UNINTERRUPTED_BUTTON_B_DOWN = false;
+
 function keyboard(callback, event){
 	var player = 1;
 	switch(event.keyCode){
@@ -76,6 +85,50 @@ function keyboard(callback, event){
 			callback(player, jsnes.Controller.BUTTON_SELECT); break;
 		case 49: // Return
 			callback(player, jsnes.Controller.BUTTON_START); break;
+		case 85: // uninterrupted b, U
+			if(callback == nes.buttonUp) {
+				clearInterval(UNINTERRUPTED_BUTTON_B_ST);
+				UNINTERRUPTED_BUTTON_B_DOWN = false;
+				return ;
+			}
+
+			if(UNINTERRUPTED_BUTTON_B_DOWN == false) {
+				callback(player, jsnes.Controller.BUTTON_B);
+				nes.buttonUp(player, jsnes.Controller.BUTTON_B);
+				
+				UNINTERRUPTED_BUTTON_B_ST = setInterval(function () {
+					callback(player, jsnes.Controller.BUTTON_B);
+					setTimeout(function () {
+						nes.buttonUp(player, jsnes.Controller.BUTTON_B);
+					}, 40);
+				}, 80);
+
+				UNINTERRUPTED_BUTTON_B_DOWN = true;
+			}
+			
+		break;
+		case 73: // uninterrupted a, I
+			if(callback == nes.buttonUp) {
+				clearInterval(UNINTERRUPTED_BUTTON_A_ST);
+				UNINTERRUPTED_BUTTON_A_DOWN = false;
+				return ;
+			}
+
+			if(UNINTERRUPTED_BUTTON_A_DOWN == false) {
+				callback(player, jsnes.Controller.BUTTON_A);
+				nes.buttonUp(player, jsnes.Controller.BUTTON_A);
+				
+				UNINTERRUPTED_BUTTON_A_ST = setInterval(function () {
+					callback(player, jsnes.Controller.BUTTON_A);
+					setTimeout(function () {
+						nes.buttonUp(player, jsnes.Controller.BUTTON_A);
+					}, 40);
+				}, 80);
+
+				UNINTERRUPTED_BUTTON_A_DOWN = true;
+			}
+			
+		break;
 		default: break;
 	}
 }
@@ -106,6 +159,7 @@ function nes_init(canvas_id){
 function nes_boot(rom_data){
 	nes.loadROM(rom_data);
 	window.requestAnimationFrame(onAnimationFrame);
+	// window.setTimeout(onAnimationFrame, VELOCITY * SPEED);
 }
 
 function nes_load_data(canvas_id, rom_data){

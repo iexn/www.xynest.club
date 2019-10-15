@@ -9,4 +9,9 @@ class Index extends Common
         return $this->fetch('/home');
     }
 
+    public function exp()
+    {
+        return $this->fetch('/exp');
+    }
+
 }

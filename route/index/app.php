@@ -35,3 +35,11 @@ Route::get('develop', 'Develop/index');
 
 // gba示例
 Route::get('game/gba/:id', 'GameGba/start');
+
+// 实验
+Route::get('exp', 'Index/exp');
+
+
+// 示例
+Route::get('demo/1', 'Demo/demo1');
+Route::get('demo/2', 'Demo/demo2');
