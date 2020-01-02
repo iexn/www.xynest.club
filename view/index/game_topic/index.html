@@ -1,0 +1,13 @@
+{extend name="common/home"}
+
+{block name="main"}
+
+<h5>游戏文章</h5>
+
+<ul>
+    {volist name="list" id="item"}
+    <li><a href="/game/topic/{$item['id']}">{$item['title']}</a></li>
+    {/volist}
+</ul>
+
+{/block}

@@ -1,7 +1,30 @@
 {extend name="common/home"}
 {block name="main"}
 
-{include file="common/developing"}
-<iframe class="music-player" frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=450 src="//music.163.com/outchain/player?type=0&id=3008206301&auto=0&height=430"></iframe>
+<div class="container">
+    <div class="row">
+        <div class="col-md-7">
+            <h4>News</h4>
+            <ul>
+                <li class="clearfix">娱乐专区增加了游戏文章版块！
+                    <span style="float:right">2019-10-30</span>
+                </li>
+                <li class="clearfix">娱乐专区新增Flash游戏！「GIRP」
+                    <span style="float:right">2019-10-28</span>
+                </li>
+                <li class="clearfix">娱乐专区新增Flash游戏！「qwop」
+                    <span style="float:right">2019-10-27</span>
+                </li>
+                <li class="clearfix">开发专区新增示例版块！展示一些Demo示例页面
+                    <span style="float:right">2019-10-23</span>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-1 col-0" style="border-right:1px solid #ccc"></div>
+        <div class="col-md-4">
+            <iframe class="music-player" frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=450 src="//music.163.com/outchain/player?type=0&id=3008206301&auto=1&height=430"></iframe>
+        </div>
+    </div>
+</div>
         
 {/block}

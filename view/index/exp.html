@@ -6,6 +6,7 @@
         <title>快打旋风</title>
     </head>
     <body>
+        <audio src="" id="audio" controls></audio>
 		<script>
             
             function PlayMusic () {
@@ -24,7 +25,12 @@
                     }
                 };
                 this.music = '';
-                this.audio = new Audio;
+                this.audio = document.getElementById('audio');
+                this.audio_call = new Audio
+
+                this.audio.addEventListener('ended', () => {
+                    // this.audio_call.play();
+                });
 
                 this.play = function (name) {
                     if(this.music == name) {
@@ -34,19 +40,23 @@
                     this.music = name;
                     let source = this.resource[name];
                     if(source.time == -1) {
-                        this.audio.loop = true;
+                        
                     }
                     this.audio.src = source.source;
+                    this.audio.loop = true;
+                    this.audio.currentTime = 0;
+                    this.audio_call.src = source.source;
+                    this.audio_call.currentTime = 0;
                     this.audio.play();
                     return source.time;
                 }
             }
             
             var _PlayMusic = new PlayMusic;
-            var during = _PlayMusic.play('start');
-            setTimeout(() => {
-                _PlayMusic.play('select');
-            }, during + 1000);
+            var during = _PlayMusic.play('select');
+            // setTimeout(() => {
+            //     _PlayMusic.play('select');
+            // }, during + 1000);
         </script>
     </body>
 </html>

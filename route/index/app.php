@@ -30,6 +30,10 @@ Route::get('game/wzq', 'GameOthers/wzq');
 // gba主页
 Route::get('game/gba/:id', 'GameGba/test');
 
+// flash主页
+Route::get('game/flash/:id', 'GameFlash/start');
+Route::get('game/flash', 'GameFlash/index');
+
 // 开发专区
 Route::get('develop', 'Develop/index');
 
@@ -39,7 +43,12 @@ Route::get('game/gba/:id', 'GameGba/start');
 // 实验
 Route::get('exp', 'Index/exp');
 
+// 游戏专题、文章
+Route::get('game/topic/:id', 'GameTopic/detail');
+Route::get('game/topic', 'GameTopic/index');
 
 // 示例
 Route::get('demo/1', 'Demo/demo1');
 Route::get('demo/2', 'Demo/demo2');
+Route::get('demo/3', 'Demo/demo3');
+Route::get('demo', 'Demo/index');

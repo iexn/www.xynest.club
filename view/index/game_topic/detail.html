@@ -1,0 +1,19 @@
+{extend name="common/home"}
+
+{block name="main"}
+
+<h3 class="text-center">{$topic['title']}</h3>
+<p class="text-center text-muted">{$topic['create_time']|date='Y-m-d H:i'}&emsp;<a href="https://m.mamecn.com/jiejiyouxichuzhaobiao/qh98czb_gdyxczb_3203.html" target="_blank">查看原文</a></p>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            {$topic['content']|raw}
+        </div>
+        <div class="col-md-4">
+            <p>更多文章</p>
+        </div>
+    </div>
+</div>
+
+{/block}
